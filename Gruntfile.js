@@ -8,6 +8,7 @@ module.exports = function(grunt){
             dist: {
                 src: [
                     'js/src/_head.js',
+                    'bower_components/moment/moment.js',
                     'js/src/functions.js',
                     'js/src/DatePicker.js',
                     'js/src/DateRangePicker.js',
