@@ -57,14 +57,16 @@ $.fn.datepicker = function(option){
         }
         if (typeof option === 'string' && typeof data[option] === 'function'){
             internal_return = data[option].apply(data, args);
-            if (internal_return !== undefined)
+            if (internal_return !== undefined) {
                 return false;
+            }
         }
     });
-    if (internal_return !== undefined)
+    if (internal_return !== undefined) {
         return internal_return;
-    else
+    } else {
         return this;
+    }
 };
 
 var locale_opts = $.fn.datepicker.locale_opts = [

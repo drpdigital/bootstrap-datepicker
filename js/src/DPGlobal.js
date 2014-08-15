@@ -36,12 +36,18 @@ var DPGlobal = {
         return {separators: separators, parts: parts};
     },
     parseDate: function(date, format, language){
-        if (!date)
+        if (!date) {
             return undefined;
-        if (date instanceof Date)
+        }
+
+        if (date instanceof Date) {
             return date;
-        if (typeof format === 'string')
+        }
+
+        if (typeof format === 'string') {
             format = DPGlobal.parseFormat(format);
+        }
+
         var part_re = /([\-+]\d+)([dmwy])/,
             parts = date.match(/([\-+]\d+)([dmwy])/g),
             part, dir, i;
@@ -79,14 +85,18 @@ var DPGlobal = {
                     return d.setUTCFullYear(2000+v);
                 },
                 m: function(d,v){
-                    if (isNaN(d))
+                    if (isNaN(d)) {
                         return d;
+                    }
                     v -= 1;
-                    while (v < 0) v += 12;
+                    while (v < 0) {
+                        v += 12;
+                    }
                     v %= 12;
                     d.setUTCMonth(v);
-                    while (d.getUTCMonth() !== v)
+                    while (d.getUTCMonth() !== v) {
                         d.setUTCDate(d.getUTCDate()-1);
+                    }
                     return d;
                 },
                 d: function(d,v){
@@ -135,18 +145,21 @@ var DPGlobal = {
                 if (s in parsed && !isNaN(parsed[s])){
                     _date = new Date(date);
                     setters_map[s](_date, parsed[s]);
-                    if (!isNaN(_date))
+                    if (!isNaN(_date)) {
                         date = _date;
+                    }
                 }
             }
         }
         return date;
     },
     formatDate: function(date, format, language){
-        if (!date)
+        if (!date) {
             return '';
-        if (typeof format === 'string')
+        }
+        if (typeof format === 'string') {
             format = DPGlobal.parseFormat(format);
+        }
         var val = {
             d: date.getUTCDate(),
             D: dates[language].daysShort[date.getUTCDay()],
@@ -162,8 +175,9 @@ var DPGlobal = {
         date = [];
         var seps = $.extend([], format.separators);
         for (var i=0, cnt = format.parts.length; i <= cnt; i++){
-            if (seps.length)
+            if (seps.length) {
                 date.push(seps.shift());
+            }
             date.push(val[format.parts[i]]);
         }
         return date.join('');

@@ -36,20 +36,23 @@ DateRangePicker.prototype.dateUpdated = function(e) {
     // `this.updating` is a workaround for preventing infinite recursion
     // between `changeDate` triggering and `setUTCDate` calling.  Until
     // there is a better mechanism.
-    if (this.updating)
+    if (this.updating) {
         return;
+    }
     this.updating = true;
 
     var dp = $(e.target).data('datepicker'),
         new_date = dp.getUTCDate(),
         i = $.inArray(e.target, this.inputs),
         l = this.inputs.length;
-    if (i === -1)
+    if (i === -1) {
         return;
+    }
 
     $.each(this.pickers, function(i, p){
-        if (!p.getUTCDate())
+        if (!p.getUTCDate()) {
             p.setUTCDate(new_date);
+        }
     });
 
     if (new_date < this.dates[i]){

@@ -6,8 +6,9 @@ $(document).on(
     '[data-provide="datepicker"]',
     function(e){
         var $this = $(this);
-        if ($this.data('datepicker'))
+        if ($this.data('datepicker')) {
             return;
+        }
         e.preventDefault();
         // component click requires us to explicitly show it
         $this.datepicker('show');

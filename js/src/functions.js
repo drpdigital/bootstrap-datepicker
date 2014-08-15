@@ -18,19 +18,23 @@ var DateArray = (function(){
             // Array.indexOf is not cross-browser;
             // $.inArray doesn't work with Dates
             var val = d && d.valueOf();
-            for (var i=0, l=this.length; i < l; i++)
-                if (this[i].valueOf() === val)
+            for (var i=0, l=this.length; i < l; i++) {
+                if (this[i].valueOf() === val) {
                     return i;
+                }
+            }
             return -1;
         },
         remove: function(i){
             this.splice(i,1);
         },
         replace: function(new_array){
-            if (!new_array)
+            if (!new_array) {
                 return;
-            if (!$.isArray(new_array))
+            }
+            if (!$.isArray(new_array)) {
                 new_array = [new_array];
+            }
             this.clear();
             this.push.apply(this, new_array);
         },
@@ -54,36 +58,39 @@ var DateArray = (function(){
 
 
 function opts_from_el(el, prefix){
-// Derive options from element data-attrs
-var data = $(el).data(),
-    out = {}, inkey,
-    replace = new RegExp('^' + prefix.toLowerCase() + '([A-Z])');
-prefix = new RegExp('^' + prefix.toLowerCase());
-function re_lower(_,a){
-    return a.toLowerCase();
-}
-for (var key in data)
-    if (prefix.test(key)){
-        inkey = key.replace(replace, re_lower);
-        out[inkey] = data[key];
+    // Derive options from element data-attrs
+    var data = $(el).data(),
+        out = {}, inkey,
+        replace = new RegExp('^' + prefix.toLowerCase() + '([A-Z])');
+    prefix = new RegExp('^' + prefix.toLowerCase());
+    function re_lower(_,a){
+        return a.toLowerCase();
     }
-return out;
+    for (var key in data) {
+        if (prefix.test(key)){
+            inkey = key.replace(replace, re_lower);
+            out[inkey] = data[key];
+        }
+    }
+    return out;
 }
 
 function opts_from_locale(lang){
-// Derive options from locale plugins
-var out = {};
-// Check if "de-DE" style date is available, if not language should
-// fallback to 2 letter code eg "de"
-if (!dates[lang]){
-    lang = lang.split('-')[0];
-    if (!dates[lang])
-        return;
-}
-var d = dates[lang];
-$.each(locale_opts, function(i,k){
-    if (k in d)
-        out[k] = d[k];
-});
-return out;
+    // Derive options from locale plugins
+    var out = {};
+    // Check if "de-DE" style date is available, if not language should
+    // fallback to 2 letter code eg "de"
+    if (!dates[lang]){
+        lang = lang.split('-')[0];
+        if (!dates[lang]) {
+            return;
+        }
+    }
+    var d = dates[lang];
+    $.each(locale_opts, function(i,k){
+        if (k in d) {
+            out[k] = d[k];
+        }
+    });
+    return out;
 }
