@@ -38,23 +38,11 @@ module.exports = function(grunt){
             locales: ['js/locales/*js']
         },
         less: {
-            standalone: {
-                files: {
-                    '_build/datepicker.standalone.css': 'build/build_standalone.less',
-                    '_build/datepicker3.standalone.css': 'build/build_standalone3.less'
-                }
-            },
-            css: {
-                files: {
-                    '_build/datepicker.css': 'build/build.less',
-                    '_build/datepicker3.css': 'build/build3.less'
-                }
-            },
-            repo: {
-                files: {
-                    'css/datepicker.css': 'build/build_standalone.less',
-                    'css/datepicker3.css': 'build/build_standalone3.less'
-                }
+            files: {
+                'dist/css/datepicker.standalone.css': 'build/build_standalone.less',
+                'dist/css/datepicker3.standalone.css': 'build/build_standalone3.less',
+                'dist/css/datepicker.css': 'build/build.less',
+                'dist/css/datepicker3.css': 'build/build3.less'
             }
         },
         uglify: {
@@ -126,8 +114,8 @@ module.exports = function(grunt){
 
     grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['jshint', 'jscs']);
     grunt.registerTask('test', 'Lint, concat then run unit tests', ['lint', 'concat', 'qunit']);
-    grunt.registerTask('finish', 'Prepares repo for commit', ['test', 'less:repo', 'screenshots']);
-    grunt.registerTask('build', 'Builds minified files', ['test', 'less:css', 'less:standalone', 'cssmin', 'uglify']);
+    grunt.registerTask('finish', 'Prepares repo for commit', ['test', 'less', 'screenshots']);
+    grunt.registerTask('build', 'Builds minified files', ['test', 'less', 'cssmin', 'uglify']);
     grunt.registerTask('default', 'build');
 
 };
