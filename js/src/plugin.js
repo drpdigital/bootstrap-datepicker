@@ -1,9 +1,39 @@
+/* global opts_from_el, opts_from_locale, DateRangePicker, Datepicker */
+/* exported locale_opts, dates */
+
 var old = $.fn.datepicker;
+
+var defaults = {
+    autoclose: false,
+    beforeShowDay: $.noop,
+    calendarWeeks: false,
+    clearBtn: false,
+    daysOfWeekDisabled: [],
+    endDate: Infinity,
+    forceParse: true,
+    format: 'mm/dd/yyyy',
+    keyboardNavigation: true,
+    language: 'en',
+    minViewMode: 0,
+    multidate: false,
+    multidateSeparator: ',',
+    orientation: "auto",
+    rtl: false,
+    startDate: -Infinity,
+    startView: 0,
+    todayBtn: false,
+    todayHighlight: false,
+    weekStart: 0
+};
+
 
 $.fn.datepicker = function(option){
     var args = Array.apply(null, arguments);
     args.shift();
     var internal_return;
+
+    this.defaults = defaults;
+
     this.each(function(){
         var $this = $(this),
             data = $this.data('datepicker'),
@@ -37,34 +67,13 @@ $.fn.datepicker = function(option){
         return this;
 };
 
-var defaults = $.fn.datepicker.defaults = {
-    autoclose: false,
-    beforeShowDay: $.noop,
-    calendarWeeks: false,
-    clearBtn: false,
-    daysOfWeekDisabled: [],
-    endDate: Infinity,
-    forceParse: true,
-    format: 'mm/dd/yyyy',
-    keyboardNavigation: true,
-    language: 'en',
-    minViewMode: 0,
-    multidate: false,
-    multidateSeparator: ',',
-    orientation: "auto",
-    rtl: false,
-    startDate: -Infinity,
-    startView: 0,
-    todayBtn: false,
-    todayHighlight: false,
-    weekStart: 0
-};
 var locale_opts = $.fn.datepicker.locale_opts = [
     'format',
     'rtl',
     'weekStart'
 ];
 $.fn.datepicker.Constructor = Datepicker;
+
 var dates = $.fn.datepicker.dates = {
     en: {
         days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],

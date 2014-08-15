@@ -1,3 +1,5 @@
+/* global Datepicker, UTCDate, dates */
+
 var DPGlobal = {
     modes: [
         {
