@@ -63,17 +63,6 @@ module.exports = function(grunt){
                     'dist/bootstrap-datepicker.locales.min.js': 'js/locales/*.js'
                 }
             },
-            locales: {
-                files: [{
-                    expand: true,
-                    cwd: 'js/locales/',
-                    src: ['*.js', '!*.min.js'],
-                    dest: 'dist/locales/',
-                    rename: function(dest, name){
-                        return dest + name.replace(/\.js$/, '.min.js');
-                    }
-                }]
-            }
         },
         cssmin: {
             all: {
