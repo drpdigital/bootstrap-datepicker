@@ -4,6 +4,24 @@ module.exports = function(grunt){
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        concat: {
+            options: {
+                separator: '',
+            },
+            dist: {
+                src: [
+                    'js/src/_head.js',
+                    'js/src/functions.js',
+                    'js/src/DatePicker.js',
+                    'js/src/DateRangePicker.js',
+                    'js/src/plugin.js',
+                    'js/src/DPGlobal.js',
+                    'js/src/data-api.js',
+                    'js/src/_foot.js',
+                ],
+                dest: 'js/bootstrap-datepicker.js',
+            },
+        },
         qunit: {
             all: ['tests/tests.html']
         },
@@ -86,7 +104,8 @@ module.exports = function(grunt){
         clean: ['_build']
     });
 
-    grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['jshint', 'jscs']);
+
+    grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['concat','jshint', 'jscs']);
     grunt.registerTask('test', 'Lint files and run unit tests', ['lint', 'qunit']);
     grunt.registerTask('finish', 'Prepares repo for commit [test, less:repo, screenshots]', ['test', 'less:repo', 'screenshots']);
     grunt.registerTask('dist', 'Builds minified files', ['less:css', 'less:standalone', 'cssmin', 'uglify']);
