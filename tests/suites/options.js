@@ -358,12 +358,13 @@ test('DaysOfWeekDisabled', function(){
 
 test('BeforeShowDay', function(){
 
+    var dateTime25th = UTCDate(2012, 9, 25).getTime();
+    var dateTime26th = UTCDate(2012, 9, 26).getTime();
+    var dateTime27th = UTCDate(2012, 9, 27).getTime();
+    var dateTime28th = UTCDate(2012, 9, 28).getTime();
+
     var beforeShowDay = function(date) {
-        var dateTime = UTCDate(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()).getTime();
-        var dateTime25th = UTCDate(2012, 9, 25).getTime();
-        var dateTime26th = UTCDate(2012, 9, 26).getTime();
-        var dateTime27th = UTCDate(2012, 9, 27).getTime();
-        var dateTime28th = UTCDate(2012, 9, 28).getTime();
+        var dateTime = UTCDate(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
 
         if (dateTime == dateTime25th) {
             return {tooltip: 'A tooltip'};
@@ -391,17 +392,22 @@ test('BeforeShowDay', function(){
         target;
 
     input.focus();
+
     target = picker.find('.datepicker-days tbody td:nth(25)');
     equal(target.attr('title'), 'A tooltip', '25th has tooltip');
     ok(!target.hasClass('disabled'), '25th is enabled');
+
     target = picker.find('.datepicker-days tbody td:nth(26)');
     ok(target.hasClass('test26'), '26th has test26 class');
     ok(!target.hasClass('disabled'), '26th is enabled');
+
     target = picker.find('.datepicker-days tbody td:nth(27)');
     ok(target.hasClass('test27'), '27th has test27 class');
     ok(target.hasClass('disabled'), '27th is disabled');
+
     target = picker.find('.datepicker-days tbody td:nth(28)');
     ok(target.hasClass('disabled'), '28th is disabled');
+
     target = picker.find('.datepicker-days tbody td:nth(29)');
     ok(!target.hasClass('disabled'), '29th is enabled');
 });
