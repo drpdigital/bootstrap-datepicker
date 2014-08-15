@@ -29,18 +29,15 @@ module.exports = function(grunt){
             options: {
                 jshintrc: true
             },
-            gruntfile: ['Gruntfile.js'],
-            main: ['js/bootstrap-datepicker.js'],
-            locales: ['js/locales/*js']
+            all : [
+                'js/src/*.js',
+                'js/locales/*js',
+                '!js/src/_*.js'
+            ]
         },
         jscs: {
-            /* grunt-contrib-jscs notes:
-                0.1.2 works
-                0.1.3 infinite loops on postinstall
-                0.1.4 doesn't seem to hit all targets when run via "grunt jscs"
-            */
             gruntfile: ['Gruntfile.js'],
-            main: ['js/bootstrap-datepicker.js'],
+            main: ['js/src/*.js'],
             locales: ['js/locales/*js']
         },
         less: {
@@ -105,11 +102,6 @@ module.exports = function(grunt){
     });
 
 
-    grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['concat','jshint', 'jscs']);
-    grunt.registerTask('test', 'Lint files and run unit tests', ['lint', 'qunit']);
-    grunt.registerTask('finish', 'Prepares repo for commit [test, less:repo, screenshots]', ['test', 'less:repo', 'screenshots']);
-    grunt.registerTask('dist', 'Builds minified files', ['less:css', 'less:standalone', 'cssmin', 'uglify']);
-
     grunt.registerTask('screenshots', 'Rebuilds automated docs screenshots', function(){
         var phantomjs = require('phantomjs').path;
 
@@ -134,4 +126,11 @@ module.exports = function(grunt){
             });
         });
     });
+
+    grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['jshint', 'jscs']);
+    grunt.registerTask('test', 'Lint files and run unit tests', ['lint', 'concat', 'qunit']);
+    grunt.registerTask('finish', 'Prepares repo for commit', ['test', 'less:repo', 'screenshots']);
+    grunt.registerTask('dist', 'Builds minified files', ['less:css', 'less:standalone', 'cssmin', 'uglify']);
+    grunt.registerTask('default', 'dist');
+
 };
