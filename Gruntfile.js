@@ -5,9 +5,6 @@ module.exports = function(grunt){
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         concat: {
-            options: {
-                separator: '',
-            },
             dist: {
                 src: [
                     'js/src/_head.js',
@@ -19,7 +16,7 @@ module.exports = function(grunt){
                     'js/src/data-api.js',
                     'js/src/_foot.js',
                 ],
-                dest: 'js/bootstrap-datepicker.js',
+                dest: 'dist/bootstrap-datepicker.js',
             },
         },
         qunit: {
