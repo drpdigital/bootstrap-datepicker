@@ -128,9 +128,9 @@ module.exports = function(grunt){
     });
 
     grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['jshint', 'jscs']);
-    grunt.registerTask('test', 'Lint files and run unit tests', ['lint', 'concat', 'qunit']);
+    grunt.registerTask('test', 'Lint, concat then run unit tests', ['lint', 'concat', 'qunit']);
     grunt.registerTask('finish', 'Prepares repo for commit', ['test', 'less:repo', 'screenshots']);
-    grunt.registerTask('dist', 'Builds minified files', ['less:css', 'less:standalone', 'cssmin', 'uglify']);
-    grunt.registerTask('default', 'dist');
+    grunt.registerTask('build', 'Builds minified files', ['test', 'less:css', 'less:standalone', 'cssmin', 'uglify']);
+    grunt.registerTask('default', 'build');
 
 };
