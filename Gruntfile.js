@@ -38,11 +38,13 @@ module.exports = function(grunt){
             locales: ['js/locales/*js']
         },
         less: {
-            files: {
-                'dist/css/datepicker.standalone.css': 'build/build_standalone.less',
-                'dist/css/datepicker3.standalone.css': 'build/build_standalone3.less',
-                'dist/css/datepicker.css': 'build/build.less',
-                'dist/css/datepicker3.css': 'build/build3.less'
+            main : {
+                files: {
+                    'dist/css/datepicker.standalone.css': 'less/build_standalone.less',
+                    'dist/css/datepicker3.standalone.css': 'less/build_standalone3.less',
+                    'dist/css/datepicker.css': 'less/build.less',
+                    'dist/css/datepicker3.css': 'less/build3.less'
+                }
             }
         },
         uglify: {
@@ -57,8 +59,8 @@ module.exports = function(grunt){
                     }
                 },
                 files: {
-                    '_build/bootstrap-datepicker.min.js': 'js/bootstrap-datepicker.js',
-                    '_build/bootstrap-datepicker.locales.min.js': 'js/locales/*.js'
+                    'dist/bootstrap-datepicker.min.js': 'dist/bootstrap-datepicker.js',
+                    'dist/bootstrap-datepicker.locales.min.js': 'js/locales/*.js'
                 }
             },
             locales: {
@@ -66,7 +68,7 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: 'js/locales/',
                     src: ['*.js', '!*.min.js'],
-                    dest: '_build/locales/',
+                    dest: 'dist/locales/',
                     rename: function(dest, name){
                         return dest + name.replace(/\.js$/, '.min.js');
                     }
@@ -76,14 +78,14 @@ module.exports = function(grunt){
         cssmin: {
             all: {
                 files: {
-                    '_build/datepicker.standalone.min.css': '_build/datepicker.standalone.css',
-                    '_build/datepicker.min.css': '_build/datepicker.css',
-                    '_build/datepicker3.standalone.min.css': '_build/datepicker3.standalone.css',
-                    '_build/datepicker3.min.css': '_build/datepicker3.css'
+                    'dist/css/datepicker.min.css': 'dist/css/datepicker.css',
+                    'dist/css/datepicker.standalone.min.css': 'dist/css/datepicker.standalone.css',
+                    'dist/css/datepicker3.min.css': 'dist/css/datepicker3.css',
+                    'dist/css/datepicker3.standalone.min.css': 'dist/css/datepicker3.standalone.css',
                 }
             }
         },
-        clean: ['_build']
+        clean: ['dist']
     });
 
 
@@ -114,8 +116,7 @@ module.exports = function(grunt){
 
     grunt.registerTask('lint', 'Lint all js files with jshint and jscs', ['jshint', 'jscs']);
     grunt.registerTask('test', 'Lint, concat then run unit tests', ['lint', 'concat', 'qunit']);
-    grunt.registerTask('finish', 'Prepares repo for commit', ['test', 'less', 'screenshots']);
-    grunt.registerTask('build', 'Builds minified files', ['test', 'less', 'cssmin', 'uglify']);
+    grunt.registerTask('build', 'Builds minified files', ['clean', 'test', 'less', 'cssmin', 'uglify']);
     grunt.registerTask('default', 'build');
 
 };
