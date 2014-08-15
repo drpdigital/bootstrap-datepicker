@@ -788,6 +788,8 @@
 
 				if (this.o.beforeShowDay !== $.noop){
 					var before = this.o.beforeShowDay(this._utc_to_local(prevMonth));
+                    clsName = [];
+                    tooltip = null;
 					if (before === undefined)
 						before = {};
 					else if (typeof(before) === 'boolean')
