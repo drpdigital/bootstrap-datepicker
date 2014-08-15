@@ -1,4 +1,4 @@
-/* global DateArray, UTCDate, DPGlobal, UTCToday, dates, defaults */
+/* global DateArray, UTCDate, DPGlobal, UTCToday, dates, defaults, moment */
 
 var Datepicker = function(element, options) {
 
@@ -1019,58 +1019,19 @@ Datepicker.prototype._setDate = function(date, which){
     }
 };
 
-Datepicker.prototype.moveMonth = function(date, dir){
-    if (!date) {
-        return undefined;
+Datepicker.prototype.moveMonth = function(date, offset) {
+
+    if (!date) { return undefined; }
+    if (!offset) { return date; }
+
+    if (offset > 0) {
+        date = moment.utc(date).add(offset, 'months');
+    } else {
+        date = moment.utc(date).add(offset, 'months');
     }
-    if (!dir) {
-        return date;
-    }
-    var new_date = new Date(date.valueOf()),
-        day = new_date.getUTCDate(),
-        month = new_date.getUTCMonth(),
-        mag = Math.abs(dir),
-        new_month, test;
-    dir = dir > 0 ? 1 : -1;
-    if (mag === 1){
-        test = dir === -1
-            // If going back one month, make sure month is not current month
-            // (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
-            ? function(){
-                return new_date.getUTCMonth() === month;
-            }
-            // If going forward one month, make sure month is as expected
-            // (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
-            : function(){
-                return new_date.getUTCMonth() !== new_month;
-            };
-        new_month = month + dir;
-        new_date.setUTCMonth(new_month);
-        // Dec -> Jan (12) or Jan -> Dec (-1) -- limit expected date to 0-11
-        if (new_month < 0 || new_month > 11) {
-            new_month = (new_month + 12) % 12;
-        }
-    }
-    else {
-        // For magnitudes >1, move one month at a time...
-        for (var i=0; i < mag; i++) {
-            // ...which might decrease the day (eg, Jan 31 to Feb 28, etc)...
-            new_date = this.moveMonth(new_date, dir);
-        }
-        // ...then reset the day, keeping it in the new month
-        new_month = new_date.getUTCMonth();
-        new_date.setUTCDate(day);
-        test = function(){
-            return new_month !== new_date.getUTCMonth();
-        };
-    }
-    // Common date-resetting loop -- if date is beyond end of month, make it
-    // end of month
-    while (test()){
-        new_date.setUTCDate(--day);
-        new_date.setUTCMonth(new_month);
-    }
-    return new_date;
+
+    // temporary until all code moved to moment
+    return date.toDate();
 };
 
 Datepicker.prototype.moveYear = function(date, dir){
