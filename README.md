@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/drpdigitalmedia/bootstrap-datepicker.png?branch=master)
+[![Build Status](https://travis-ci.org/drpdigitalmedia/bootstrap-datepicker.png?branch=master)](https://travis-ci.org/drpdigitalmedia/bootstrap-datepicker)
 
 # bootstrap-datepicker
 
