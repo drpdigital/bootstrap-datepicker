@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/drpdigitalmedia/bootstrap-datepicker.png?branch=master)
+
 # bootstrap-datepicker
 
 This is a fork of Stefan Petre's [original code](http://www.eyecon.ro/bootstrap-datepicker/);
@@ -12,7 +14,6 @@ Versions are incremented according to [semver](http://semver.org/).
 * [Online Demo](http://eternicode.github.io/bootstrap-datepicker/)
 * [Online Docs](http://bootstrap-datepicker.readthedocs.org/) (ReadTheDocs.com)
 * [Google Group](https://groups.google.com/group/bootstrap-datepicker/)
-* [Travis CI ![Build Status](https://travis-ci.org/eternicode/bootstrap-datepicker.png?branch=master)](https://travis-ci.org/eternicode/bootstrap-datepicker)
 
 ## Development
 
